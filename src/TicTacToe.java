@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-class TicTacToe{
+class TicTacToe
+{
 
     private static final int ROWS = 3;
     private static final int COLS = 3;
@@ -10,57 +11,58 @@ class TicTacToe{
     {
         Scanner in = new Scanner(System.in);
 
-        clearBoard();
         String player;
         int count = 0;
-        display();
 
         int rowMove;
         int colMove;
+        boolean playAgain;
 
-        do
-        {
-            player = "X";
-            do{
-                rowMove = SafeInput.getRangedInt(in, "Player 1 enter your row position [1-3]: ", 1,3 );
-                colMove = SafeInput.getRangedInt(in, "Player 1 enter your column position [1-3]: ", 1,3 );
-                rowMove -= 1;
-                colMove -= 1;
-            } while(!isValidMove(rowMove, colMove));
-
-            board[rowMove][colMove] = "X";
+        do {
+            clearBoard();
             display();
-            if(isWin(player))
-            {
-                System.out.println("Player 1 Wins!");
-                break;
-            }
-            else if (isTie()) {
-                System.out.println("It's a Tie!");
-                break;
-            }
+            do {
+                player = "X";
+                do {
+                    rowMove = SafeInput.getRangedInt(in, "Player 1 enter your row position [1-3]", 1, 3);
+                    colMove = SafeInput.getRangedInt(in, "Player 1 enter your column position [1-3]", 1, 3);
+                    rowMove -= 1;
+                    colMove -= 1;
+                } while (!isValidMove(rowMove, colMove));
 
-            player = "O";
-            do{
-                rowMove = SafeInput.getRangedInt(in, "Player 2 enter your row position [1-3]: ", 1,3 );
-                colMove = SafeInput.getRangedInt(in, "Player 2 enter your column position [1-3]: ", 1,3 );
-                rowMove -= 1;
-                colMove -= 1;
-            } while(!isValidMove(rowMove, colMove));
+                board[rowMove][colMove] = "X";
+                display();
+                if (count>= 4 && isWin(player)) {
+                    System.out.println("Player 1 Wins!");
+                    break;
+                } else if (count>= 7 && isTie()) {
+                    System.out.println("It's a Tie!");
+                    break;
+                }
 
-            board[rowMove][colMove] = "O";
-            display();
-            if(isWin(player)){
-                System.out.println("Player 2 Wins!");
-                break;
-            }
-            else if (isTie()) {
-                System.out.println("It's a Tie!");
-                break;
-            }
-            count += 1;
-        } while(!isTie());
+                player = "O";
+                do {
+                    rowMove = SafeInput.getRangedInt(in, "Player 2 enter your row position [1-3]", 1, 3);
+                    colMove = SafeInput.getRangedInt(in, "Player 2 enter your column position [1-3]", 1, 3);
+                    rowMove -= 1;
+                    colMove -= 1;
+                } while (!isValidMove(rowMove, colMove));
+
+                board[rowMove][colMove] = "O";
+                display();
+                if (isWin(player)) {
+                    System.out.println("Player 2 Wins!");
+                    break;
+                } else if (isTie()) {
+                    System.out.println("It's a Tie!");
+                    break;
+                }
+                count += 1;
+            } while (!isTie());
+            playAgain = SafeInput.getYNConfirm(in, "Play Again");
+        } while(playAgain);
     }
+
     private static void clearBoard()    // sets all the board elements to a space
     {
         for(int row=0; row < ROWS; row++)
@@ -72,7 +74,10 @@ class TicTacToe{
         }
     }
 
-    private static void display() {
+    private static void display()
+    {
+        System.out.println("TIC-TAC-TOE GAME");
+        System.out.println("----------------");
         for (int row = 0; row < ROWS; row++)
         {
             for (int col = 0; col < COLS; col++)
@@ -84,6 +89,7 @@ class TicTacToe{
                     System.out.print("\n");
             }
         }
+        System.out.println("----------------");
     }
 
     private static boolean isValidMove(int row, int col)
@@ -104,7 +110,6 @@ class TicTacToe{
         }
         return false;
     }
-
 
     private static boolean isColWin(String player)
     {
