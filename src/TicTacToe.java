@@ -32,13 +32,14 @@ class TicTacToe
 
                 board[rowMove][colMove] = "X";
                 display();
-                if (count>= 4 && isWin(player)) {
+                if (count >= 4 && isWin(player)) {
                     System.out.println("Player 1 Wins!");
                     break;
-                } else if (count>= 7 && isTie()) {
+                } else if (count >= 7 && isTie()) {
                     System.out.println("It's a Tie!");
                     break;
                 }
+                count += 1;
 
                 player = "O";
                 do {
@@ -50,10 +51,10 @@ class TicTacToe
 
                 board[rowMove][colMove] = "O";
                 display();
-                if (isWin(player)) {
+                if (count >= 4 && isWin(player)) {
                     System.out.println("Player 2 Wins!");
                     break;
-                } else if (isTie()) {
+                } else if (count >= 7 && isTie()) {
                     System.out.println("It's a Tie!");
                     break;
                 }
@@ -152,4 +153,3 @@ class TicTacToe
             return true;
     }
 }
-
