@@ -64,7 +64,11 @@ class TicTacToe
         } while(playAgain);
     }
 
-    private static void clearBoard()    // sets all the board elements to a space
+    /**
+     * A method that sets all the board elements to a space.
+     *
+     */
+    private static void clearBoard()
     {
         for(int row=0; row < ROWS; row++)
         {
@@ -75,6 +79,10 @@ class TicTacToe
         }
     }
 
+    /**
+     * A method that displays the board.
+     *
+     */
     private static void display()
     {
         System.out.println("TIC-TAC-TOE GAME");
@@ -93,6 +101,14 @@ class TicTacToe
         System.out.println("----------------");
     }
 
+    /**
+     * A method that returns true if there is a space at the given proposed
+     * move coordinates which means it is a legal move.
+     *
+     * @param row
+     * @param col
+     * @return
+     */
     private static boolean isValidMove(int row, int col)
     {
         boolean retVal = false;
@@ -103,6 +119,15 @@ class TicTacToe
         return retVal;
     }
 
+    /**
+     *
+     * A method that checks to see if there is a win state on the current board
+     * for the specified player (X or O). This method in turn calls three additional
+     * methods that break down the 3 kinds of wins that are possible.
+     *
+     * @param player        String with specified player X or O
+     * @return              True for win or False for no win condition
+     */
     private static boolean isWin(String player)
     {
         if(isColWin(player) || isRowWin(player) || isDiagnalWin(player))
@@ -111,6 +136,13 @@ class TicTacToe
         }
         return false;
     }
+
+    /**
+     * A method that checks for a col win for specified player
+     *
+     * @param player        String with specified player X or O
+     * @return              True for win or False for no win condition
+     */
 
     private static boolean isColWin(String player)
     {
@@ -122,6 +154,12 @@ class TicTacToe
         return false; // no column win
     }
 
+    /**
+     * A method that checks for a row win for the specified player
+     *
+     * @param player        String with specified player X or O
+     * @return              True for win or False for no win condition
+     */
     private static boolean isRowWin(String player)
     {
         for(int row=0; row < ROWS; row++)
@@ -132,6 +170,12 @@ class TicTacToe
         return false; // no row win
     }
 
+    /**
+     * A method that checks for a diagonal win for the specified player
+     *
+     * @param player        String with specified player X or O
+     * @return              True for win or False for no win condition
+     */
     private static boolean isDiagnalWin(String player)
     {
         if(board[0][0].equals(player) && board[1][1].equals(player) && board[2][2].equals(player))
@@ -142,6 +186,11 @@ class TicTacToe
             return false;   // no diagonal win
     }
 
+    /**
+     * A method that checks for a tie condition
+     *
+     * @return              True for tie condition and False for no tie condition
+     */
     private static boolean isTie()
     {
         for (int row = 0; row < ROWS; row++) {
